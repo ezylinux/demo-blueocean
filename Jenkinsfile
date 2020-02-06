@@ -9,6 +9,7 @@ pipeline {
       }
       steps {
           sh 'echo "feature-1"' 
+          sh 'printenv'
       }   
     }
     stage('Build') {
@@ -19,7 +20,7 @@ pipeline {
       }
       steps {
         sh 'echo "build" ; ls'
-        
+        sh 'printenv'
       }
     }
     stage('Build1') {
