@@ -1,11 +1,36 @@
 pipeline {
   agent any
   stages {
-    stage('demo') {
+    stage('Pull code') {
+      when {
+        expression {
+          env.BRANCH_NAME.contains("feature")
+        }
+      }
       steps {
-        sh 'ls'
+          sh 'echo "feature-1"' 
+      }   
+    }
+    stage('Build') {
+      when {
+        not {
+          branch 'master'
+        }
+      }
+      steps {
+        sh 'echo "build" ; ls'
+        
       }
     }
-
+    stage('Build1') {
+      when {
+          branch 'dev'
+      }
+      steps {
+        sh 'echo "build" ; ls'
+        sh 'printenv'
+        
+      }
+    }    
   }
 }
