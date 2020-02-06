@@ -2,15 +2,21 @@ pipeline {
   agent any
   stages {
     stage('Pull code') {
-      steps {
-        if (env.BRANCH_NAME == 'feature-1') {
-          sh 'echo "feature-1"' 
+      when {
+        expression {
+          !env.BRANCH_NAME.contains("HotFix")
         }
-        sh 'printenv'
-          
       }
+      steps {
+          sh 'echo "feature-1"' 
+      }   
     }
     stage('Build') {
+      when {
+        not {
+          branch 'master'
+        }
+      }
       steps {
         sh 'echo "build"'
         
