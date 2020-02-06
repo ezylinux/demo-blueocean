@@ -4,7 +4,7 @@ pipeline {
     stage('Pull code') {
       when {
         expression {
-          !env.BRANCH_NAME.contains("HotFix")
+          env.BRANCH_NAME.contains("feature")
         }
       }
       steps {
@@ -18,9 +18,20 @@ pipeline {
         }
       }
       steps {
-        sh 'echo "build"'
+        sh 'echo "build" ; ls'
         
       }
     }
+    stage('Build') {
+      when {
+        not {
+          branch 'dev'
+        }
+      }
+      steps {
+        sh 'echo "build" ; ls'
+        
+      }
+    }    
   }
 }
