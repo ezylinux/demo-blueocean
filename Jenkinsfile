@@ -1,11 +1,15 @@
 pipeline {
   agent any
   stages {
-    stage('demo') {
+    stage('Pull code') {
       steps {
-        sh 'ls'
+        sh 'printenv'
+          
       }
     }
-
+    stage('Build')
+      steps {
+        sh 'echo "build"'
+      }
   }
 }
